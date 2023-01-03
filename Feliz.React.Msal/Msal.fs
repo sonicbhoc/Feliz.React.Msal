@@ -1,6 +1,5 @@
 ﻿namespace Feliz.React.Msal
 
-open System.Collections.Generic
 open System
 open Fable.Core
 open Fable.Core.JS
