@@ -30,11 +30,15 @@
   <ItemGroup>
     <None Include="paket.references" />
     <None Include="paket.template" />
+    <Compile Include="Config.fs" />
+    <Compile Include="Account.fs" />
+    <Compile Include="Requests.fs" />
     <Compile Include="Msal.fs" />
+    <Compile Include="Hooks.fs" />
   </ItemGroup>
   <PropertyGroup>
     <NpmDependencies>
-      <NpmPackage Name="@azure/msal-browser" Version="gte 2.32.1" ResolutionStrategy="Max"/>
+      <NpmPackage Name="@azure/msal-browser" Version="gte 2.32.1" ResolutionStrategy="Max" />
       <NpmPackage Name="@azure/msal-react" Version="gte 1.5.1" ResolutionStrategy="Max" />
     </NpmDependencies>
   </PropertyGroup>
