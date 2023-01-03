@@ -44,12 +44,14 @@ module Msal =
           correlationId: string }
 
     type IPublicClientApplication =
+        abstract member acquireTokenPopup : request : Requests.PopupRequest -> Promise<AuthenticationResult option>
+        abstract member acquireTokenRedirect : request : Requests.RedirectRequest -> Promise<AuthenticationResult option>
+        abstract member acquireTokenSilent: request: Requests.SilentRequest -> Promise<AuthenticationResult option>
         abstract member loginRedirect: request: Requests.RedirectRequest -> unit
         abstract member loginPopup: request: Requests.PopupRequest -> Promise<Result<AuthenticationResult, AuthError>>
         abstract member logout: unit -> unit
         abstract member logoutRedirect: request: Requests.RedirectRequest -> Promise<unit>
         abstract member getAllAccounts: unit -> AccountInfo []
-        abstract member acquireTokenSilent: request: Requests.SilentRequest -> Promise<AuthenticationResult option>
         abstract member getAccountByUsername: userName: string -> AccountInfo option
         abstract member setActiveAccount: account: AccountInfo option -> unit
         abstract member getActiveAccount: unit -> AccountInfo option
@@ -57,12 +59,14 @@ module Msal =
     [<Import("PublicClientApplication", from = "@azure/msal-browser")>]
     type PublicClientApplication(config: MsalConfig) =
         interface IPublicClientApplication with
+            member _.acquireTokenPopup (request: Requests.PopupRequest) = jsNative
+            member _.acquireTokenRedirect (request: Requests.RedirectRequest) = jsNative
+            member _.acquireTokenSilent(request: Requests.SilentRequest) = jsNative
             member _.loginRedirect(request: Requests.RedirectRequest) = jsNative
             member _.loginPopup(request: Requests.PopupRequest) = jsNative
             member _.logout() = jsNative
             member _.logoutRedirect(request: Requests.RedirectRequest) = jsNative
             member _.getAllAccounts() : AccountInfo [] = jsNative
-            member _.acquireTokenSilent(request: Requests.SilentRequest) = jsNative
             member _.getAccountByUsername(userName: string) = jsNative
             member _.setActiveAccount(account: AccountInfo option) = jsNative
             member _.getActiveAccount() : AccountInfo option = jsNative
