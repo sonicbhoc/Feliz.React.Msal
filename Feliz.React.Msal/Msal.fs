@@ -18,17 +18,6 @@ module Msal =
     let unauthenticatedTemplate: obj =
         import "UnauthenticatedTemplate" "@azure/msal-react"
 
-    ///<summary>Used to request scopes when requesting token</summary>
-    type TokenRequest =
-        { account: AccountInfo
-          scopes: string []
-          forceRefresh: bool }
-
-    type CommonSilentFlowRequest =
-        { account: AccountInfo
-          forceRefresh: bool
-          tokenQueryParameters: Dictionary<string, string> }
-
     type AuthenticationResult =
         { authority: string
           uniqueId: string
@@ -126,20 +115,6 @@ module Msal =
         static member inline create props =
             Interop.reactApi.createElement (unauthenticatedTemplate, createObj !!props)
 
-    ///Send request to server to reset user password.
-    let forgotPasswordRequest (config: MsalConfig) : Requests.RedirectRequest =
-        { account = None
-          authority = Some config.auth.authority
-          postLogoutRedirectUri = Some config.auth.postLogoutRedirectUri
-          redirectUri = Some config.auth.redirectUri }
-
-    ///Send request to server to edit user profile.
-    let editProfileRequest (config: MsalConfig) : Requests.RedirectRequest =
-        { account = None
-          authority = Some config.auth.authority
-          postLogoutRedirectUri = Some config.auth.postLogoutRedirectUri
-          redirectUri = Some config.auth.redirectUri }
-
     let forgotPassword (error: string) = error.Contains("AADB2C90118")
 
     let createClient config =
@@ -172,21 +147,3 @@ module Msal =
                   AccountInfo = account }
             | None -> User.Default
         | _ -> User.Default
-
-    ///Use this to request token from auth server
-    let tokenRequest account scopes : Requests.SilentRequest =
-        { Requests.SilentRequest.Default with
-            account = Some account
-            scopes = Some scopes
-            forceRefresh = false }
-
-    let redirectRequest msalConfig redirectUri : Requests.RedirectRequest =
-        { account = None
-          authority = Some msalConfig.auth.authority
-          postLogoutRedirectUri = Some redirectUri
-          redirectUri = Some msalConfig.auth.redirectUri }
-
-    let popupRequest msalConfig =
-        { Requests.PopupRequest.Default with
-            authority = Some msalConfig.auth.authority
-            redirectUri = Some msalConfig.auth.redirectUri }

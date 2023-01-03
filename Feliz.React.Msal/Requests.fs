@@ -81,3 +81,46 @@ type RedirectRequest =
       account: AccountInfo option
       redirectUri: string option
       postLogoutRedirectUri: string option }
+
+///<summary>Used to request scopes when requesting token</summary>
+type TokenRequest =
+    { account: AccountInfo
+      scopes: string []
+      forceRefresh: bool }
+
+type CommonSilentFlowRequest =
+    { account: AccountInfo
+      forceRefresh: bool
+      tokenQueryParameters: Dictionary<string, string> }
+
+///Send request to server to reset user password.
+let forgotPasswordRequest (config: MsalConfig) : RedirectRequest =
+    { account = None
+      authority = Some config.auth.authority
+      postLogoutRedirectUri = Some config.auth.postLogoutRedirectUri
+      redirectUri = Some config.auth.redirectUri }
+
+///Send request to server to edit user profile.
+let editProfileRequest (config: MsalConfig) : RedirectRequest =
+    { account = None
+      authority = Some config.auth.authority
+      postLogoutRedirectUri = Some config.auth.postLogoutRedirectUri
+      redirectUri = Some config.auth.redirectUri }
+
+///Use this to request token from auth server
+let tokenRequest account scopes : SilentRequest =
+    { SilentRequest.Default with
+        account = Some account
+        scopes = Some scopes
+        forceRefresh = false }
+
+let redirectRequest msalConfig redirectUri : RedirectRequest =
+    { account = None
+      authority = Some msalConfig.auth.authority
+      postLogoutRedirectUri = Some redirectUri
+      redirectUri = Some msalConfig.auth.redirectUri }
+
+let popupRequest msalConfig =
+    { PopupRequest.Default with
+        authority = Some msalConfig.auth.authority
+        redirectUri = Some msalConfig.auth.redirectUri }
