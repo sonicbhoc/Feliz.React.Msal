@@ -43,8 +43,8 @@ module Msal =
           correlationId: string }
 
     type IPublicClientApplication =
-        abstract member acquireTokenPopup : request : Requests.PopupRequest -> Promise<AuthenticationResult option>
-        abstract member acquireTokenRedirect : request : Requests.RedirectRequest -> Promise<AuthenticationResult option>
+        abstract member acquireTokenPopup: request: Requests.PopupRequest -> Promise<AuthenticationResult option>
+        abstract member acquireTokenRedirect: request: Requests.RedirectRequest -> Promise<AuthenticationResult option>
         abstract member acquireTokenSilent: request: Requests.SilentRequest -> Promise<AuthenticationResult option>
         abstract member loginRedirect: request: Requests.RedirectRequest -> unit
         abstract member loginPopup: request: Requests.PopupRequest -> Promise<Result<AuthenticationResult, AuthError>>
@@ -58,8 +58,8 @@ module Msal =
     [<Import("PublicClientApplication", from = "@azure/msal-browser")>]
     type PublicClientApplication(config: MsalConfig) =
         interface IPublicClientApplication with
-            member _.acquireTokenPopup (request: Requests.PopupRequest) = jsNative
-            member _.acquireTokenRedirect (request: Requests.RedirectRequest) = jsNative
+            member _.acquireTokenPopup(request: Requests.PopupRequest) = jsNative
+            member _.acquireTokenRedirect(request: Requests.RedirectRequest) = jsNative
             member _.acquireTokenSilent(request: Requests.SilentRequest) = jsNative
             member _.loginRedirect(request: Requests.RedirectRequest) = jsNative
             member _.loginPopup(request: Requests.PopupRequest) = jsNative
