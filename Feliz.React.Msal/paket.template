@@ -4,3 +4,9 @@ files
     *.fsproj ==> fable/
     **/*.fs ==> fable/
     **/*.fsi ==> fable/
+
+releaseNotes
+  Add acquiring tokens interactively with popups or redirects to support the default MSAL workflow:
+
+    * Attempt to acquire token silently.
+    * If acquisition returns an exception, interactively acquire token using redirect or popup.
