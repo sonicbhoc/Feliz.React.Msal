@@ -60,7 +60,7 @@ let initTargets () =
 
     let pack =
         BuildTask.create "Pack" [ buildRelease ] {
-            DotNet.exec id "paket" $"pack --symbols {projDir}"
+            DotNet.exec id "paket" $"""pack --symbols --template {projDir @@ "paket.template"} {slnDir @@ "package/"}"""
             |> printRes "Pack"
         }
 
