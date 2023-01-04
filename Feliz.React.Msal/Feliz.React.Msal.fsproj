@@ -7,7 +7,7 @@
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <PackageId>Feliz.React.Msal</PackageId>
     <Title>Feliz.React.Msal</Title>
-    <Version>0.1.14</Version>
+    <Version>0.1.20</Version>
     <Authors>Rasheed Aboud</Authors>
     <Company>ARMM Services</Company>
     <Description>Feliz style bindings for Microsoft Authentication Library for JavaScript (MSAL.js). </Description>
@@ -15,13 +15,6 @@
     <PackageTags>feliz;fsharp;msal;react;fable;fable-binding;fable-javascript; safe</PackageTags>
     <RepositoryUrl>https://github.com/rasheedaboud/Feliz.React.Msal</RepositoryUrl>
     <PackageProjectUrl>https://github.com/rasheedaboud/Feliz.React.Msal</PackageProjectUrl>
-    <PackageReleaseNotes>
-      Switch Package Manager from NuGet to Paket.
-      Build nuget package using Paket.
-      Add Fake build system.
-      Pin Feliz to v.1.68 and Fable to v3 as newer versions break ABI compatibility
-      Add .NET 6.0 as a target framework.
-		</PackageReleaseNotes>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
